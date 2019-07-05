@@ -17,8 +17,6 @@ def signup(request):
             except User.DoesNotExist:
                 user = User.objects.create_user(request.POST['InputUser'],
                                                 password=request.POST['inputPassword1'],
-                                                first_name=request.POST['firstName'],
-                                                last_name=request.POST['lastName'],
                                                 email=request.POST['emailAddress'],
                                                 )
                 auth.login(request, user)
@@ -43,6 +41,8 @@ def login(request):
                                  password=request.POST['inputPassword'])
         if user is not None:
             auth.login(request, user)
+            print(user.username)
+            print(user.password)
             return redirect('home')
         else:
             return render(request, 'accounts/login.html',
