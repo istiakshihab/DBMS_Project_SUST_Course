@@ -1,5 +1,5 @@
 """
-WSGI config for LoginTemp project.
+WSGI config for Project_Website project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'LoginTemp.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Project_Website.settings')
 
 application = get_wsgi_application()
