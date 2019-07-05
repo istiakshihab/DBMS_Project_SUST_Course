@@ -22,6 +22,16 @@ def signup(request):
                                                 email=request.POST['emailAddress'],
                                                 )
                 auth.login(request, user)
+
+                user = request.POST.get('InputUser')
+                password = request.POST.get('inputPassword1')
+                type = request.POST.get('optionsRadios')
+                email = request.POST.get('emailAddress')
+
+                new_user = Users(username=user, password=password, type=type, email=email)
+                new_user.save()
+                print(type)
+
                 return redirect('home')
     else:
         return render(request, 'accounts/signup.html', {'nbar': 'signup'})
@@ -47,28 +57,13 @@ def logout(request):
         return redirect('home')
 
 
-def trying(request):
-    if request.method == 'POST':
-        user = request.POST.get('InputUser')
-        password = request.POST.get('inputPassword1')
-        type = request.POST.get('optionsRadios')
-        email = request.POST.get('emailAddress')
-
-        c = Users(username=user, password=password, type=type, email=email)
-        c.save()
-        print(type)
-        return redirect('home')
-    else:
-        return render(request, 'accounts/signup.html', {'nbar': 'signup'})
-
-
 def trying2(request):
     if request.method == 'POST':
         user = request.POST.get('InputUser')
         password = request.POST.get('inputPassword')
 
         c = 'a'
-        c = Users.objects.filter(username__exact=user).filter(pasword__exact=password)
+        c = Users.objects.filter(username__exact=user).filter(password__exact=password)
         if len(c) == 0:
             print("hello")
             return redirect('home')
