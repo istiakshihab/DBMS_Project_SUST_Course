@@ -6,16 +6,20 @@
     <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-image: url({%static 'bg.jpg' %});
+            background-color: #cccccc;
+}
+    </style>
 </head>
 <body>
-
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container" >
             <a class="navbar-brand" href="{% url 'home' %}" style="font-family: 'Pacifico', cursive;" >
                 <img src={% static 'idea.png' %} width="25" height="25"
-                     class="d-inline-block align-top" >
-CourseDB            </a>
+                     class="d-inline-block align-top" >CourseDB</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">

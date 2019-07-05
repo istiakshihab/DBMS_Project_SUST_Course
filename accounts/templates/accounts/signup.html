@@ -11,18 +11,13 @@
         <footer class="blockquote-footer"><cite title="Source Title">Team SSFC</cite></footer>
     </blockquote>
 
-    <div class="card container" style="width: 50rem">
+    <div class="card container" style="width: 40rem">
+    <div class="container">
+    <br>
+        <p align="center">Please fill in the form to register.</p>
         <form method="post" action="{% url 'signup' %}" style="font-family: 'Open Sans';">
             {% csrf_token %}
             <br>
-            <div class="form-group" >
-                <label for="firstName" class="bmd-label-floating">First Name</label>
-                <input type="text" class="form-control" name="firstName">
-            </div>
-            <div class="form-group">
-                <label for="lastName" class="bmd-label-floating">Last Name</label>
-                <input type="text" class="form-control" name="lastName">
-            </div>
             <div class="form-group">
                 <label for="InputUser" class="bmd-label-floating">Email Address</label>
                 <input type="text" class="form-control" name="emailAddress">
@@ -44,6 +39,24 @@
                 <label for="inputPassword2" class="bmd-label-floating">Confirm Password</label>
                 <input type="password" class="form-control" name="inputPassword2">
             </div>
+        <br>
+            <div class="container">
+            <p class="text-left">Who are you?</p>
+            <div class="container">
+            <div class="radio">
+                <label>
+                <input type="radio" name="optionsRadios" id="Teacher" value="Teacher" checked>
+                    Teacher
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                <input type="radio" name="optionsRadios" id="Student" value="Student" checked>
+                    Student
+                </label>
+            </div>
+            </div>
+            </div>
             {% if error %}
                 <div class="alert alert-danger" role="alert">
                     Account already Exists!
@@ -53,6 +66,7 @@
             {% endif %}
             <button type="submit" class="btn btn-raised btn-primary" style="display: block; margin: 0 auto;" data-toggle="snackbar" data-content="Your will getting signed in now" data-html-allowed="true" data-timeout="0">Sign up</button>
         </form>
+    </div>
     </div>
     </body>
 {% endblock %}
