@@ -112,3 +112,20 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+*.pyc
+*.xml
+.idea/dataSources.xml
+.idea/LoginTemp.iml
+.idea/misc.xml
+.idea/vcs.xml
+*.meta
+*.xml
+.idea
+__pycache__
+
+*.pyc
+*.xml
+*.meta
+
