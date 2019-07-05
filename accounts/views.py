@@ -20,7 +20,6 @@ def signup(request):
                                                 first_name=request.POST['firstName'],
                                                 last_name=request.POST['lastName'],
                                                 email=request.POST['emailAddress'],
-
                                                 )
                 auth.login(request, user)
                 return redirect('home')
@@ -52,7 +51,7 @@ def trying(request):
     if request.method == 'POST':
         user = request.POST.get('InputUser')
         password = request.POST.get('inputPassword1')
-        type = request.POST.get('emailAddress')
+        type = request.POST.get('optionsRadios')
 
         c = Users(username=user, pasword=password, type=type)
         c.save()
