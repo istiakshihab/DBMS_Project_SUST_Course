@@ -17,20 +17,22 @@ def signup(request):
             except User.DoesNotExist:
                 user = User.objects.create_user(request.POST['InputUser'],
                                                 password=request.POST['inputPassword1'],
-                                                email=request.POST['emailAddress'],
-                                                )
-                auth.login(request, user)
+                                                first_name='GayMan',
+                                                last_name='Rafi',
+                                                email=request.POST['emailAddress'],)
 
+                auth.login(request, user)
+                                                
                 user = request.POST.get('InputUser')
                 password = request.POST.get('inputPassword1')
                 type = request.POST.get('optionsRadios')
-                email = request.POST.get('emailAddress')
 
-                new_user = Users(username=user, password=password, type=type, email=email)
+                new_user = Users(username=user, password=password, type=type)
                 new_user.save()
                 print(type)
 
-                return redirect('home')
+                if type == 'Student':
+                    return redirect('student_signup')
     else:
         return render(request, 'accounts/signup.html', {'nbar': 'signup'})
 
@@ -72,3 +74,22 @@ def trying2(request):
             return redirect('home')
     else:
         return render(request, 'accounts/login.html', {'nbar': 'login'})
+
+
+def student_signup(request):
+    if request.method == 'POST':
+        firstname = request.POST.get('firstName')
+        lastname = request.POST.get('lastName')
+        registration = request.POST.get('registration')
+        session = request.POST.get('session')
+        contact = request.POST.get('contact')
+
+        new_student = Student(FirstName='firstname',
+                              LastName='lastname',
+                              RegistrationNumber='registraion',
+                              Session='session',
+                              ContactNumber='contact')
+        new_student.save()
+        return redirect('home')
+    else:
+        return render(request,'accounts/student_form.html',{'nbar':'student_signup'})
