@@ -131,10 +131,10 @@ class Offeredcourse(models.Model):
 
 
 class Student(models.Model):
-    firstname = models.CharField(db_column='FirstName', max_length=50, blank=True, null=True)  # Field name made lowercase.
-    lastname = models.CharField(db_column='LastName', max_length=50, blank=True, null=True)  # Field name made lowercase.
-    contactnumber = models.CharField(db_column='ContactNumber', max_length=50, blank=True, null=True)  # Field name made lowercase.
-    registrationnumber = models.CharField(db_column='RegistrationNumber', primary_key=True, max_length=10)  # Field name made lowercase.
+    firstname = models.CharField(db_column='First Name', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    lastname = models.CharField(db_column='Last Name', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    contactnumber = models.CharField(db_column='Contact Number', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    registrationnumber = models.CharField(db_column='Registration Number', primary_key=True, max_length=10)  # Field name made lowercase.
     session = models.CharField(db_column='Session', max_length=50, blank=True, null=True)  # Field name made lowercase.
     username = models.ForeignKey('Users', models.DO_NOTHING, db_column='Username', blank=True, null=True)  # Field name made lowercase.
 
@@ -170,7 +170,7 @@ class Teacher(models.Model):
     last_name = models.CharField(db_column='Last Name', max_length=50, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     designation = models.CharField(db_column='Designation', max_length=6, blank=True, null=True)  # Field name made lowercase.
     code = models.CharField(db_column='Code', unique=True, max_length=3, blank=True, null=True)  # Field name made lowercase.
-    contact = models.CharField(db_column='Contact', max_length=12, blank=True, null=True)  # Field name made lowercase.
+    contact = models.CharField(db_column='Contact Number', max_length=12, blank=True, null=True)  # Field name made lowercase.
     username = models.ForeignKey('Users', models.DO_NOTHING, db_column='Username', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
@@ -199,8 +199,9 @@ class TeamStudent(models.Model):
 
 class Users(models.Model):
     username = models.CharField(db_column='Username', primary_key=True, max_length=50)  # Field name made lowercase.
-    pasword = models.CharField(db_column='Pasword', max_length=50)  # Field name made lowercase.
-    type = models.CharField(db_column='Type', max_length=1)  # Field name made lowercase.
+    password = models.CharField(db_column='Pasword', max_length=50)  # Field name made lowercase.
+    type = models.CharField(db_column='Type', max_length=7)  # Field name made lowercase.
+    email= models.CharField(db_column='Email', max_length=50)  # Field name made lowercase.
 
     class Meta:
         managed = False

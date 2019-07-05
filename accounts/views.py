@@ -52,11 +52,12 @@ def trying(request):
     if request.method == 'POST':
         user = request.POST.get('InputUser')
         password = request.POST.get('inputPassword1')
-        type = request.POST.get('emailAddress')
+        type = request.POST.get('optionsRadios')
+        email = request.POST.get('emailAddress')
 
-        c = Users(username=user, pasword=password, type=type)
+        c = Users(username=user, password=password, type=type, email=email)
         c.save()
-
+        print(type)
         return redirect('home')
     else:
         return render(request, 'accounts/signup.html', {'nbar': 'signup'})
