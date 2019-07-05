@@ -180,10 +180,7 @@ CREATE TABLE IF NOT EXISTS `auth_user` (
 -- Dumping data for table teamssfc.auth_user: ~4 rows (approximately)
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-	(1, 'pbkdf2_sha256$150000$5CTNfMa5PWCd$m6LduD/Ao/lQg7yp8oBr19n2HuIaxRKM+/R2dcwuBiA=', '2019-07-04 16:51:39.177043', 1, 'teamssfc', '', '', '', 1, 1, '2019-07-03 16:57:23.940468'),
-	(2, 'pbkdf2_sha256$150000$ePKa888iMUnY$P4kRl/qyDBTAuI7tEHkeJl3GhbY7f3u78QVMtKIogyU=', '2019-07-05 08:14:11.630043', 0, 'user', '', '', 'user', 0, 1, '2019-07-05 08:00:54.534253'),
-	(3, 'pbkdf2_sha256$150000$iCfZ3JtkmdrW$KfEL23gjNdtAVA342oDsDs/aYYinIQ1v4ScAKDcrU0k=', '2019-07-05 08:06:00.547291', 0, 'user1', '', '', 'user1', 0, 1, '2019-07-05 08:05:59.847290'),
-	(4, 'pbkdf2_sha256$150000$yxffqgbNbXnX$mmX8bmSwRd9GO0IW9iuFNA2bOkJPOm9yZUs9qwOyvvo=', '2019-07-05 08:17:39.618739', 0, 'user2', '', '', 'user2', 0, 1, '2019-07-05 08:17:38.956993');
+	(1, 'pbkdf2_sha256$150000$5CTNfMa5PWCd$m6LduD/Ao/lQg7yp8oBr19n2HuIaxRKM+/R2dcwuBiA=', '2019-07-04 16:51:39.177043', 1, 'teamssfc', '', '', '', 1, 1, '2019-07-03 16:57:23.940468');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 
 -- Dumping structure for table teamssfc.auth_user_groups
@@ -344,8 +341,10 @@ CREATE TABLE IF NOT EXISTS `django_session` (
   KEY `django_session_expire_date_a5c62663` (`expire_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table teamssfc.django_session: ~1 rows (approximately)
+-- Dumping data for table teamssfc.django_session: ~0 rows (approximately)
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
+INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+	('tc7ikzue5aehl3y7wm760pu8dq2yyk6k', 'YzYzZTZhZDM2NzNhZTBiZjVmZTNmOWZhZmE3NTY2YWU0MjM3MjE2MTp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJiOTc0YmQ4ZDc0YjYyYjc2ZjFlMzRlYWZiOTc5MmRjMTc0ZjdiMzAxIn0=', '2019-07-19 09:12:23.947374');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 
 -- Dumping structure for table teamssfc.offeredcourse
@@ -412,7 +411,7 @@ CREATE TABLE IF NOT EXISTS `task` (
   CONSTRAINT `Course ID` FOREIGN KEY (`CourseID`) REFERENCES `course` (`CourseID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table teamssfc.task: ~0 rows (approximately)
+-- Dumping data for table teamssfc.task: ~1 rows (approximately)
 /*!40000 ALTER TABLE `task` DISABLE KEYS */;
 INSERT INTO `task` (`TaskID`, `Start Date`, `Deadline`, `CourseID`) VALUES
 	('T0012', '2019-10-11 11:27:50', '2019-10-23 11:28:36', NULL);
@@ -542,10 +541,7 @@ INSERT INTO `users` (`Username`, `Pasword`, `Type`, `Email`) VALUES
 	('sowmen22', 'dipta204', '', NULL),
 	('summith', '45eryt57e', '', NULL),
 	('teamssfc', 'HElloMyFrieNd16', '', NULL),
-	('tirtha29', '5645854841', '', NULL),
-	('user', 'user', 'Teacher', 'user'),
-	('user1', 'user', 'Student', 'user1'),
-	('user2', 'user', 'Teacher', 'user2');
+	('tirtha29', '5645854841', '', NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
