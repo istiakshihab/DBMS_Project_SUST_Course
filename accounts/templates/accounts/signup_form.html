@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Signup</title>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <body style="font-family: 'Open Sans'">
+    <br>
+    <blockquote class="blockquote text-center">
+        <p class="mb-0">
+        <h1>Welcome to our Website!</h1></p>
+        <footer class="blockquote-footer"><cite title="Source Title">Team SSFC</cite></footer>
+    </blockquote>
+    <div class="container" align="center">
+
+        <span class="d-block p-3 bg-light text-black" style="width: 40rem">Please fill in this Form to register.</span>
+    <div class="card container" style="width: 40rem">
+        <div class="container" align="left">
+            <form method="post" novalidate style="font-size: 15px">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="container" align="center">
+                <button  type="submit" class="btn btn-raised btn-success">Register</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+
+    </body>
+{% endblock %}
+</html>
