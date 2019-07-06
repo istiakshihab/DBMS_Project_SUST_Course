@@ -25,9 +25,9 @@
                 </thead>
                 <tbody>
                 {% for course in Courses %}
-                <tr>
+                <tr class="clickable-row" data-href="main/{{ course.course_id }}">
                     <th scope="row">{{ forloop.counter }}</th>
-                    <td><a href={% url 'home' %}>{{ course.course_id }}</a></td>
+                    <td><a>{{ course.course_id }}</a></td>
                     <td>{{ course.course_name }}</td>
                     <td>{{ course.credit }}</td>
                 </tr>
