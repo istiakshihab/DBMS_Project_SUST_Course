@@ -5,11 +5,14 @@ from django.contrib import auth
 
 
 def home(request):
-    if request.user.is_student:
-        registration = request.user.username
-        query = ''
+    if request.user.is_authenticated:
+        if request.user.is_student:
+            registration = request.user.username
+            query = ''
 
-        return render(request, 'products/home.html', {query})
+            return render(request, 'products/home.html', {query})
+        else:
+            return render(request, 'products/home.html', {'Courses': 'home'})
     else:
         return render(request, 'products/home.html', {'Courses': 'home'})
 
