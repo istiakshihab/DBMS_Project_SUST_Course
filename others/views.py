@@ -5,7 +5,13 @@ from django.contrib import auth
 
 
 def home(request):
-    return render(request, 'products/home.html', {'nbar': 'home'})
+    if request.user.is_student:
+        registration = request.user.username
+        query = ''
+
+        return render(request, 'products/home.html', {query})
+    else:
+        return render(request, 'products/home.html', {'Courses': 'home'})
 
 
 def profile(request):

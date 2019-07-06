@@ -5,18 +5,33 @@
     <body>
 
     {% if user.is_authenticated and user.is_teacher %}
-        <div class="jumbotron">
-            <div class="container">
-                <h1 class="display-4" style="font-family: 'Catamaran', sans-serif;">Success</h1>
-                <p class="lead">You have successfully Logged In a Teacher!</p>
-            </div>
+        <div class="jumbotron" style="height: 10px">
+            <h1 class="display-4" style="font-family: 'Catamaran', sans-serif;" align="center">
+                Active Courses</h1>
         </div>
         <br>
         <div class="container">
-            <div style="text-align: center">
-                <img src="https://i.dailymail.co.uk/i/pix/2016/03/18/15/324D202500000578-3498922-image-a-33_1458315465874.jpg"
-                     height="300px">
-            </div>
+            <table class="table table-hover table-light">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Course Code</th>
+                    <th scope="col">Course Name</th>
+                    <th scope="col">Course Credit</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for course in Courses %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ course.couse_id }}</td>
+                    <td>{{ course.course_name }}</td>
+                    <td>{{ course.credit }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
         </div>
     {% elif user.is_authenticated and user.is_student %}
         <div class="jumbotron">
@@ -47,8 +62,10 @@
                 <h1 class="display-4" align="center">Welcome</h1>
                 <div align="center">
                     <h3 align="center">Register as A: </h3>
-                    <a href="{% url 'student_signup' %}" class="btn btn-raised btn-primary">Student</a>
-                    <a href="{% url 'teacher_signup' %}" class="btn btn-raised btn-primary">Teacher</a>
+                    <a href="{% url 'student_signup' %}"
+                       class="btn btn-raised btn-primary">Student</a>
+                    <a href="{% url 'teacher_signup' %}"
+                       class="btn btn-raised btn-primary">Teacher</a>
                 </div>
                 <br>
                 <h3 align="center">Or</h3>
