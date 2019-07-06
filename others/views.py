@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.contrib import auth
+from others.models import *
 
 
 def home(request):
@@ -12,7 +13,11 @@ def home(request):
 
             return render(request, 'products/home.html', {query})
         else:
-            return render(request, 'products/home.html', {'Courses': 'home'})
+            teacher_id = request.user.username
+            course = Course.objects.all()
+            print(course)
+
+            return render(request, 'products/home.html', {'Courses': course})
     else:
         return render(request, 'products/home.html', {'Courses': 'home'})
 
