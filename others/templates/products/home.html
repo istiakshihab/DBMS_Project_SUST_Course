@@ -8,7 +8,7 @@
         <div class="jumbotron">
             <div class="container">
                 <h1 class="display-4" style="font-family: 'Catamaran', sans-serif;">Success</h1>
-                <p class="lead">You have successfully Logged In a Teacher!</p>
+                <p class="lead" align="center">You have successfully Logged In a Teacher!</p>
             </div>
         </div>
         <br>
@@ -36,24 +36,24 @@
     {% else %}
         <div class="jumbotron">
             <div class="container">
-                <h1 class="display-4">Welcome</h1>
-                <p class="lead">This will be our homepage!</p>
+                <h1 class="display-4" align="center">Welcome</h1>
+                <p class="lead" align="center"></p>
                 <div align="center">
-                    <h3 align="center">Register as A: </h3>
+                    <h3 align="center">Register as a: </h3>
                     <a href="{% url 'student_signup' %}" class="btn btn-success">Student</a>
                     <a href="{% url 'teacher_signup' %}" class="btn btn-success">Teacher</a>
                 </div>
                 <br>
                 <h3 align="center">Or</h3>
                 <div align="center">
-                    <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+                    <a href="{% url 'login' %}" class="btn btn-success">Login</a>
                 </div>
             </div>
         </div>
         <br>
         <div class="container">
             <div style="text-align: center">
-                <img src="https://static.comicvine.com/uploads/original/15/150109/4147321-batman+35+image+3.jpg"
+                <img src="https://www.mercyrelief.org/site/wp-content/uploads/education-icon.png"
                      class="img-fluid">
             </div>
         </div>
