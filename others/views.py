@@ -9,18 +9,14 @@ def home(request):
     if request.user.is_authenticated:
         if request.user.is_student:
             registration = request.user.username
-            Courses = OfferedCourse.objects.raw("SELECT * "
-                                                "FROM others_offeredcourse "
-                                                "WHERE others_offeredcourse.teachers_code_id=28 "
-                                                "AND others_offeredcourse.is_expired=0 "
-                                                "AND others_offeredcourse.offered_course_id_id=7")
-            return render(request, 'products/home.html', {'Courses': Courses})
+
+            return render(request, 'products/home.html',) #{'Courses': Courses})
         else:
             teacher_id = request.user.id
             offered_course = OfferedCourse.objects.filter(teachers_code=teacher_id).values(
                 'offered_course_id_id')
-            Courses = Course.objects.filter(course_id__in=offered_course)
-            return render(request, 'products/home.html', {'Courses': Courses})
+            courses = Course.objects.filter(course_id__in=offered_course)
+            return render(request, 'products/home.html', {'Courses': courses})
     else:
         return render(request, 'products/home.html', {'Courses': 'home'})
 
