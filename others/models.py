@@ -27,16 +27,25 @@ class Task(models.Model):
     deadline = models.DateTimeField(blank=True, null=True)
     course_id = models.ForeignKey(OfferedCourse, on_delete=models.CASCADE, blank=True, null=True)
 
+    def __str__(self):
+        return self.task_id
+
 
 class Team(models.Model):
     team_name = models.CharField(max_length=50, blank=True, null=True)
     course_id = models.ForeignKey(OfferedCourse, on_delete=models.CASCADE, blank=True, null=True)
     students = models.ManyToManyField(Student)
 
+    def __str__(self):
+        return self.team_name
+
 
 class TaskTeam(models.Model):
     task_id = models.ForeignKey(Task, on_delete=models.CASCADE, blank=True, null=True)
     team_id = models.ForeignKey(Team, on_delete=models.CASCADE, blank=True, null=True)
     files = models.CharField(max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        return self.team_id_id
 
 
