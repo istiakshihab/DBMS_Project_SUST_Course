@@ -16,7 +16,10 @@ def home(request):
                                                 "AND others_offeredcourse.offered_course_id_id=7")
             return render(request, 'products/home.html', {'Courses': Courses})
         else:
-            Courses = Course.objects.all()
+            teacher_id = request.user.id
+            offered_course = OfferedCourse.objects.filter(teachers_code=teacher_id).values(
+                'offered_course_id_id')
+            Courses = Course.objects.filter(course_id__in=offered_course)
             return render(request, 'products/home.html', {'Courses': Courses})
     else:
         return render(request, 'products/home.html', {'Courses': 'home'})
