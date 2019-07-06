@@ -44,8 +44,8 @@ def login(request):
 
 def logout(request):
     if request.method == 'POST':
-        print(request.POST.get('mrbutton'))
-        return HttpResponseRedirect('home')
+        auth.logout(request)
+        return redirect('home')
 
 
 def create_course(request):
