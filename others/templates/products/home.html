@@ -57,18 +57,18 @@
             </div>
         </div>
         <br>
-        <div class="jumbotron">
+        <div class="jumbotron jumbotron-fluid">
+            <h1 class="display-4" align="center">Welcome to CourseDB</h1>
             <div class="container">
-                <h1 class="display-4" align="center">Welcome</h1>
                 <div align="center">
-                    <h3 align="center">Register as A: </h3>
+                    <h5 align="center">Register as</h5>
                     <a href="{% url 'student_signup' %}"
-                       class="btn btn-raised btn-primary">Student</a>
+                       class="btn btn-raised btn-success">Student</a>
                     <a href="{% url 'teacher_signup' %}"
-                       class="btn btn-raised btn-primary">Teacher</a>
+                       class="btn btn-raised btn-success">Teacher</a>
                 </div>
-                <br>
-                <h3 align="center">Or</h3>
+                <hr>
+                <h5 align="center">Already a User?</h5>
                 <div align="center">
                     <a href="{% url 'login' %}" class="btn btn-raised btn-primary">Login</a>
                 </div>
