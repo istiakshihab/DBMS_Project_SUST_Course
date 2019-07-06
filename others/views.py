@@ -8,9 +8,12 @@ from others.models import *
 def home(request):
     if request.user.is_authenticated:
         if request.user.is_student:
-            registration = request.user.username
-
-            return render(request, 'products/home.html',) #{'Courses': Courses})
+            student_id = request.user.id
+            courses = Team.objects.filter(student_id_id=student_id).values('course_id_id')
+            offered_course = OfferedCourse.objects.filter(is_expired=0).values('offered_course_id_id')
+            offered_course = offered_course.filter(id__in=courses)
+            courses = Course.objects.filter(course_id__in=offered_course)
+            return render(request, 'products/home.html', {'Courses': courses})
         else:
             teacher_id = request.user.id
             offered_course = OfferedCourse.objects.filter(teachers_code=teacher_id).values(
@@ -51,16 +54,8 @@ def create_course(request):
             if request.method == 'POST':
                 print("Nothing")
             else:
-                x = OfferedCourse.objects.filter(is_expired=0)
-                x = x.values('offered_course_id_id')
-                y = Course.objects.all()
-                y = y.values('course_id')
-                y = y.exclude(course_id__in=x)
-                x = OfferedCourse.objects.filter(is_expired=0)
-                x = x.values('offered_course_id_id')
-                x = x.values('offered_course_id_id')
-                y = Course.objects.all()
-                y = y.values('course_id')
+                x = OfferedCourse.objects.filter(is_expired=0).values('offered_course_id_id')
+                y = Course.objects.all().values('course_id')
                 y = y.exclude(course_id__in=x)
                 return render(request, 'products/create_course.html', {'nbar': y})
         else:

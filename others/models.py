@@ -34,7 +34,7 @@ class Task(models.Model):
 class Team(models.Model):
     team_name = models.CharField(max_length=50, blank=True, null=True)
     course_id = models.ForeignKey(OfferedCourse, on_delete=models.CASCADE, blank=True, null=True)
-    students = models.ManyToManyField(Student)
+    student_id = models.ForeignKey(Student, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.team_name
