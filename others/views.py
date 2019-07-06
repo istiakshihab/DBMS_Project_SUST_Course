@@ -1,6 +1,6 @@
-from django.shortcuts import render,redirect
-from django.contrib.auth import logout
-from django.contrib.auth.models import User
+from django.http import HttpResponseForbidden
+from django.shortcuts import render, redirect
+
 from django.contrib import auth
 from others.models import *
 
@@ -9,15 +9,15 @@ def home(request):
     if request.user.is_authenticated:
         if request.user.is_student:
             registration = request.user.username
-            query = ''
-
-            return render(request, 'products/home.html', {query})
+            Courses = OfferedCourse.objects.raw("SELECT * "
+                                                "FROM others_offeredcourse "
+                                                "WHERE others_offeredcourse.teachers_code_id=28 "
+                                                "AND others_offeredcourse.is_expired=0 "
+                                                "AND others_offeredcourse.offered_course_id_id=7")
+            return render(request, 'products/home.html', {'Courses': Courses})
         else:
-            teacher_id = request.user.username
-            course = Course.objects.all()
-            print(course)
-
-            return render(request, 'products/home.html', {'Courses': course})
+            Courses = Course.objects.all()
+            return render(request, 'products/home.html', {'Courses': Courses})
     else:
         return render(request, 'products/home.html', {'Courses': 'home'})
 
@@ -44,3 +44,28 @@ def logout(request):
     if request.method == 'POST':
         auth.logout(request)
         return redirect('home')
+
+
+def create_course(request):
+    if request.user.is_authenticated:
+        if request.user.is_teacher:
+            if request.method == 'POST':
+                print("Nothing")
+            else:
+                x = OfferedCourse.objects.filter(is_expired=0)
+                x = x.values('offered_course_id_id')
+                y = Course.objects.all()
+                y = y.values('course_id')
+                y = y.exclude(course_id__in=x)
+                x = OfferedCourse.objects.filter(is_expired=0)
+                x = x.values('offered_course_id_id')
+                x = x.values('offered_course_id_id')
+                y = Course.objects.all()
+                y = y.values('course_id')
+                y = y.exclude(course_id__in=x)
+                return render(request, 'products/create_course.html', {'nbar': y})
+        else:
+            return HttpResponseForbidden()
+    else:
+        return HttpResponseForbidden()
+
