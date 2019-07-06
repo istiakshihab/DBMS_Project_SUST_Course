@@ -5,7 +5,22 @@ from django.contrib import auth
 
 
 def home(request):
+
     return render(request, 'products/home.html', {'nbar': 'home'})
+
+    if request.user.is_authenticated:
+        if request.user.is_student:
+
+            return render(request, 'products/home.html', {'Courses': 'Home'})
+        else:
+            teacher_id = request.user.username
+            course = Course.objects.all()
+            print(course)
+
+            return render(request, 'products/home.html', {'Courses': course})
+    else:
+        return render(request, 'products/home.html', {'Courses': 'home'})
+
 
 
 def profile(request):
