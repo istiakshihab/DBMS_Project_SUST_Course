@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from others.models import *
 from accounts.models import *
 
+
 def home(request):
     if request.user.is_authenticated:
         if request.user.is_student:
@@ -41,8 +42,8 @@ def login(request):
 
 def logout(request):
     if request.method == 'POST':
-        print(request.POST.get('mrbutton'))
-        return HttpResponseRedirect('home')
+        auth.logout(request)
+        return redirect('home')
 
 
 def create_course(request):
