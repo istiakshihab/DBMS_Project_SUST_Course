@@ -34,28 +34,30 @@
         </div>
 
     {% else %}
+        <br>
+        <div class="container">
+            <div style="text-align: center">
+                <img src="http://www.forsythunitedway.org/wp-content/uploads/2015/08/education-icon.png"
+                     class="img-fluid" width="150" height="150">
+            </div>
+        </div>
+        <br>
         <div class="jumbotron">
             <div class="container">
                 <h1 class="display-4" align="center">Welcome</h1>
                 <div align="center">
                     <h3 align="center">Register as A: </h3>
-                    <a href="{% url 'student_signup' %}" class="btn btn-primary">Student</a>
-                    <a href="{% url 'teacher_signup' %}" class="btn btn-primary">Teacher</a>
+                    <a href="{% url 'student_signup' %}" class="btn btn-raised btn-primary">Student</a>
+                    <a href="{% url 'teacher_signup' %}" class="btn btn-raised btn-primary">Teacher</a>
                 </div>
                 <br>
                 <h3 align="center">Or</h3>
                 <div align="center">
-                    <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+                    <a href="{% url 'login' %}" class="btn btn-raised btn-primary">Login</a>
                 </div>
             </div>
         </div>
         <br>
-        <div class="container">
-            <div style="text-align: center">
-                <img src="http://www.forsythunitedway.org/wp-content/uploads/2015/08/education-icon.png"
-                     class="img-fluid">
-            </div>
-        </div>
     {% endif %}
     </body>
 {% endblock %}
