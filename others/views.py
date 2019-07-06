@@ -13,11 +13,10 @@ def home(request):
 
             return render(request, 'products/home.html', {query})
         else:
-            teacher_id = request.user.username
-            course = Course.objects.all()
-            print(course)
-
-            return render(request, 'products/home.html', {'Courses': course})
+            teacher_id = request.user.id
+            offered_course = OfferedCourse.objects.filter(teachers_code=teacher_id).values('offered_course_id_id')
+            active_course = Course.objects.filter(course_id__in=offered_course)
+            return render(request, 'products/home.html', {'Courses': active_course})
     else:
         return render(request, 'products/home.html', {'Courses': 'home'})
 
