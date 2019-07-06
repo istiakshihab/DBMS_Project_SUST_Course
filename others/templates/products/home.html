@@ -5,18 +5,37 @@
     <body>
 
     {% if user.is_authenticated and user.is_teacher %}
-        <div class="jumbotron">
-            <div class="container">
-                <h1 class="display-4" style="font-family: 'Catamaran', sans-serif;">Success</h1>
-                <p class="lead" align="center">You have successfully Logged In a Teacher!</p>
-            </div>
+
+        <div class="jumbotron" style="...">
+            <h1 class="display-4" style="..." align="center">
+                Active Courses</h1>
+        </div>
+        <div class="container" align="center">
+        <a href="#" class="btn btn-raised btn-info" style="align-self:center">Create Course</a>
         </div>
         <br>
         <div class="container">
-            <div style="text-align: center">
-                <img src="https://i.dailymail.co.uk/i/pix/2016/03/18/15/324D202500000578-3498922-image-a-33_1458315465874.jpg"
-                     height="300px">
-            </div>
+            <table class="table table-hover table-light">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Course Code</th>
+                    <th scope="col">Course Name</th>
+                    <th scope="col">Course Credit</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for course in Courses %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ course.course_id }}</td>
+                    <td>{{ course.course_name }}</td>
+                    <td>{{ course.credit }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
         </div>
     {% elif user.is_authenticated and user.is_student %}
         <div class="jumbotron">
@@ -34,29 +53,32 @@
         </div>
 
     {% else %}
-        <div class="jumbotron">
+        <br>
+        <div class="container">
+            <div style="text-align: center">
+                <img src="http://www.forsythunitedway.org/wp-content/uploads/2015/08/education-icon.png"
+                     class="img-fluid" width="150" height="150">
+            </div>
+        </div>
+        <br>
+        <div class="jumbotron jumbotron-fluid">
+            <h1 class="display-4" align="center">Welcome to CourseDB</h1>
             <div class="container">
-                <h1 class="display-4" align="center">Welcome</h1>
-                <p class="lead" align="center"></p>
                 <div align="center">
-                    <h3 align="center">Register as a: </h3>
-                    <a href="{% url 'student_signup' %}" class="btn btn-success">Student</a>
-                    <a href="{% url 'teacher_signup' %}" class="btn btn-success">Teacher</a>
+                    <h5 align="center">Register as</h5>
+                    <a href="{% url 'student_signup' %}"
+                       class="btn btn-raised btn-success">Student</a>
+                    <a href="{% url 'teacher_signup' %}"
+                       class="btn btn-raised btn-success">Teacher</a>
                 </div>
-                <br>
-                <h3 align="center">Or</h3>
+                <hr>
+                <h5 align="center">Already a User?</h5>
                 <div align="center">
-                    <a href="{% url 'login' %}" class="btn btn-success">Login</a>
+                    <a href="{% url 'login' %}" class="btn btn-raised btn-primary">Login</a>
                 </div>
             </div>
         </div>
         <br>
-        <div class="container">
-            <div style="text-align: center">
-                <img src="https://www.mercyrelief.org/site/wp-content/uploads/education-icon.png"
-                     class="img-fluid">
-            </div>
-        </div>
     {% endif %}
     </body>
 {% endblock %}

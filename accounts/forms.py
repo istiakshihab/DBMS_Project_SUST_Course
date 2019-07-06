@@ -1,12 +1,12 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 
-from accounts.models import Student, User
+from accounts.models import Student, User, Teacher
 
 
 class StudentSignUpForm(UserCreationForm):
     sess = forms.CharField(label='Session')
-    
+
     class Meta(UserCreationForm.Meta):
         model = User
         help_texts = {
@@ -35,4 +35,6 @@ class TeacherSignUpForm(UserCreationForm):
         user.is_teacher = True
         if commit:
             user.save()
+        teacher = Teacher.objects.create(user=user)
+        teacher.save()
         return user
