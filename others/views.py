@@ -1,7 +1,7 @@
-from django.http import HttpResponseForbidden
+from django.contrib import auth
+from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render, redirect
 
-from django.contrib import auth
 from others.models import *
 
 
@@ -45,15 +45,16 @@ def login(request):
 
 def logout(request):
     if request.method == 'POST':
-        auth.logout(request)
-        return redirect('home')
+        print(request.POST.get('mrbutton'))
+        return HttpResponseRedirect('home')
 
 
 def create_course(request):
     if request.user.is_authenticated:
         if request.user.is_teacher:
             if request.method == 'POST':
-                print("Nothing")
+                print(request.POST.get('optionsRadios'))
+                return redirect('home')
             else:
                 x = OfferedCourse.objects.filter(is_expired=0)
                 x = x.values('offered_course_id_id')
@@ -66,9 +67,10 @@ def create_course(request):
                 y = Course.objects.all()
                 y = y.values('course_id')
                 y = y.exclude(course_id__in=x)
-                return render(request, 'products/create_course.html', {'nbar': y})
+                x = Course.objects.all()
+                x = x.filter(course_id__in=y)
+                return render(request, 'products/create_course.html', {'OfCourses': x})
         else:
             return HttpResponseForbidden()
     else:
         return HttpResponseForbidden()
-
