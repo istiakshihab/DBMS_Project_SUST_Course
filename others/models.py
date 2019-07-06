@@ -8,11 +8,17 @@ class Course(models.Model):
     course_name = models.CharField(max_length=50, blank=True, null=True)
     credit = models.FloatField(blank=True, null=True)
 
+    def __str__(self):
+        return self.course_id
+
 
 class OfferedCourse(models.Model):
     offered_course_id = models.OneToOneField(Course, on_delete=models.CASCADE)
     teachers_code = models.ForeignKey(Teacher, on_delete=models.CASCADE, blank=True, null=True)
     is_expired = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.offered_course_id_id
 
 
 class Task(models.Model):
