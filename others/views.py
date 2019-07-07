@@ -54,9 +54,8 @@ def create_course(request):
             if request.method == 'POST':
                 selected_course = request.POST.get('optionsRadios')
                 teacher_id = request.user.id
-                new_cffered_course = OfferedCourse.objects.create(offered_course_id_id=selected_course,
-                                                                  teachers_code_id=teacher_id, is_expired=False)
-
+                OfferedCourse.objects.create(offered_course_id_id=selected_course,
+                                             teachers_code_id=teacher_id, is_expired=False)
                 return redirect('home')
             else:
                 not_expired = OfferedCourse.objects.filter(is_expired=0).values('offered_course_id_id')
@@ -75,11 +74,27 @@ def course_enroll(request):
     if request.user.is_authenticated:
         if request.user.is_student:
             if request.method == 'POST':
-                print(request.POST.get('TeamName'))
-                print(request.POST.get('TeamMember1'))
-                print(request.POST.get('TeamMember2'))
-                print(request.POST.get('TeamMember3'))
-                print(request.POST.get('courseSelect'))
+                team_name = request.POST.get('TeamName')
+                member = request.POST.get('TeamMember1')
+                member1 = User.objects.filter(username=member).values('id').first()
+                member1 = member1.get('id')
+
+                member = request.POST.get('TeamMember2')
+                member2 = User.objects.filter(username=member).values('id').first()
+                member2 = member2.get('id')
+
+                member = request.POST.get('TeamMember3')
+                member3 = User.objects.filter(username=member).values('id').first()
+                member13 = member3.get('id')
+
+                course = request.POST.get('courseSelect')
+                course_id = OfferedCourse.objects.filter(offered_course_id_id=course).values('id').first()
+                course_id = course_id.get('id')
+
+                Team.objects.create(team_name=team_name, course_id_id=course_id, student_id_id=member1)
+                Team.objects.create(team_name=team_name, course_id_id=course_id, student_id_id=member2)
+                Team.objects.create(team_name=team_name, course_id_id=course_id, student_id_id=member3)
+
                 return redirect('home')
             else:
                 not_expired = OfferedCourse.objects.filter(is_expired=0).values('offered_course_id_id')
@@ -87,7 +102,6 @@ def course_enroll(request):
                 course = course.filter(course_id__in=not_expired)
                 courses = Course.objects.all()
                 courses = courses.filter(course_id__in=course)
-                print(courses)
                 return render(request, 'products/course_enroll.html', {'courses': courses})
         else:
             return HttpResponseForbidden()
@@ -106,4 +120,3 @@ def course_detail(request, course_id):
     else:
         print("Not Authorized")
         return HttpResponseForbidden(request, '<h1>Not Authorized</h1>')
-
