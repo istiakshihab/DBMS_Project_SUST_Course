@@ -3,7 +3,6 @@ from django.http import HttpResponseForbidden, HttpResponseRedirect, HttpRespons
 from django.shortcuts import render, redirect, get_object_or_404
 
 from others.models import *
-from accounts.models import *
 
 
 def home(request):
@@ -72,7 +71,7 @@ def course_detail(request, course_id):
     if request.user.is_authenticated:
         if request.user.is_teacher:
             course_obj = get_object_or_404(Course, course_id=course_id)
-            return HttpResponse('<h1>course_id</h1>')
+            return render(request, 'products/course.html')
         else:
             return HttpResponse('<h1>course_id</h1>')
     else:

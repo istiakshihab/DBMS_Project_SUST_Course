@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<title>Home</title>
+{% extends 'base.html' %}
+{% block content %}
+    <body>
+
+    {% if user.is_authenticated and user.is_teacher %}
+        <div class="jumbotron" style="height: 10px">
+            <h1 class="display-4" style="font-family: 'Catamaran', sans-serif;" align="center">
+                Course Tasks</h1>
+        </div>
+        <div class="container" align="center">
+        <a href={% url 'create_course' %} class="btn btn-raised btn-info" style="align-self:center">Create Task</a>
+        </div>
+        <br>
+        <div class="container">
+            <table class="table table-hover table-light">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col"></th>
+                    <th scope="col">Course Name</th>
+                    <th scope="col">Course Credit</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for course in Courses %}
+                <tr class="clickable-row" data-href="main/{{ course.course_id }}">
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td><a>{{ course.course_id }}</a></td>
+                    <td>{{ course.course_name }}</td>
+                    <td>{{ course.credit }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% elif user.is_authenticated and user.is_student %}
+        <div class="jumbotron" style="height: 10px">
+            <h1 class="display-4" style="font-family: 'Catamaran', sans-serif;" align="center">
+                Enrolled Courses</h1>
+        </div>
+        <br>
+        <div class="container" align="center">
+        <a href={% url 'create_course' %} class="btn btn-raised btn-info" style="align-self:center">Enroll in a course</a>
+        </div>
+        <br>
+        <div class="container">
+            <table class="table table-hover table-light">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Course Code</th>
+                    <th scope="col">Course Name</th>
+                    <th scope="col">Course Credit</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for course in Courses %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ course.course_id }}</td>
+                    <td>{{ course.course_name }}</td>
+                    <td>{{ course.credit }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    {% else %}
+        <br>
+        <div class="container">
+            <div style="text-align: center">
+                <img src="http://www.forsythunitedway.org/wp-content/uploads/2015/08/education-icon.png"
+                     class="img-fluid" width="150" height="150">
+            </div>
+        </div>
+        <br>
+        <div class="jumbotron jumbotron-fluid">
+            <h1 class="display-4" align="center">Welcome to CourseDB</h1>
+            <div class="container">
+                <div align="center">
+                    <h5 align="center">Register as</h5>
+                    <a href="{% url 'student_signup' %}"
+                       class="btn btn-raised btn-success">Student</a>
+                    <a href="{% url 'teacher_signup' %}"
+                       class="btn btn-raised btn-success">Teacher</a>
+                </div>
+                <hr>
+                <h5 align="center">Already a User?</h5>
+                <div align="center">
+                    <a href="{% url 'login' %}" class="btn btn-raised btn-primary">Login</a>
+                </div>
+            </div>
+        </div>
+        <br>
+    {% endif %}
+    </body>
+{% endblock %}
+
