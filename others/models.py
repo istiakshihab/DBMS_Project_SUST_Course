@@ -23,9 +23,10 @@ class OfferedCourse(models.Model):
 
 class Task(models.Model):
     task_id = models.CharField(primary_key=True, max_length=50)
-    start_date = models.DateTimeField(blank=True, null=True)
     deadline = models.DateTimeField(blank=True, null=True)
     course_id = models.ForeignKey(OfferedCourse, on_delete=models.CASCADE, blank=True, null=True)
+    task_description = models.CharField(max_length=1000, null=True)
+    referrence = models.CharField(max_length=100, null=True)
 
     def __str__(self):
         return self.task_id
