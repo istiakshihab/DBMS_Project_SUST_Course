@@ -5,7 +5,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from others.models import *
 
 
-
 def home(request):
     if request.user.is_authenticated:
         if request.user.is_student:
@@ -53,9 +52,9 @@ def create_course(request):
     if request.user.is_authenticated:
         if request.user.is_teacher:
             if request.method == 'POST':
-                selsected_course = request.POST.get('optionsRadios')
+                selected_course = request.POST.get('optionsRadios')
                 teacher_id = request.user.id
-                new_cffered_course = OfferedCourse.objects.create(offered_course_id_id=selsected_course,
+                new_cffered_course = OfferedCourse.objects.create(offered_course_id_id=selected_course,
                                                                   teachers_code_id=teacher_id, is_expired=False)
 
                 return redirect('home')
@@ -76,9 +75,15 @@ def course_enroll(request):
     if request.user.is_authenticated:
         if request.user.is_student:
             if request.method == 'POST':
+
                 print("Nothing")
             else:
-                return render(request, 'products/course_enroll.html', {'nbar': y})
+                not_expired = OfferedCourse.objects.filter(is_expired=0).values('offered_course_id_id')
+                course = Course.objects.all().values('course_id')
+                course = course.filter(course_id__in=not_expired)
+                courses = Course.objects.all()
+                courses = courses.filter(course_id__in=course)
+                return render(request, 'products/course_enroll.html', {'nbar': courses})
         else:
             return HttpResponseForbidden()
     else:
@@ -89,6 +94,7 @@ def course_detail(request, course_id):
     if request.user.is_authenticated:
         if request.user.is_teacher:
             course_obj = get_object_or_404(Course, course_id=course_id)
+
             return render(request, 'products/course.html')
         else:
             return HttpResponse('<h1>course_id</h1>')
