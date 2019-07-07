@@ -116,7 +116,7 @@ def course_detail(request, course_id):
             course = OfferedCourse.objects.filter(offered_course_id_id=selected_course).values('id')
             team = Team.objects.all()
             team = team.filter(course_id_id__in=course)
-            task = Task.objects.filter(course_id_id__in=course)
+            task = Task.objects.filter(course_id_id__in=course).order_by('-deadline')
             return render(request, 'products/course.html', {'teams': team, 'tasks': task})
         else:
             return HttpResponse('<h1>course_id</h1>')
