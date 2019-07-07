@@ -50,11 +50,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for team in teams %}
+                {% for count,team in data %}
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
                         <td>{{ team.team_name }}</td>
-                        <td>{{ team_task_count }}/{{ total_task_count }}</td>
+                        <td>{{ count }}/{{ total_task_count }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
