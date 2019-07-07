@@ -46,6 +46,7 @@
                 <tr>
                     <th scope="col">No.</th>
                     <th scope="col">Team Name</th>
+                    <th scope="col">Completed Task</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -53,6 +54,7 @@
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
                         <td>{{ team.team_name }}</td>
+                        <td>{{ team_task_count }}/{{ total_task_count }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
