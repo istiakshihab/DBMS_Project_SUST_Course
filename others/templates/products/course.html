@@ -7,33 +7,57 @@
     {% if user.is_authenticated and user.is_teacher %}
         <div class="jumbotron" style="height: 10px">
             <h1 class="display-4" style="font-family: 'Catamaran', sans-serif;" align="center">
-                Course Tasks</h1>
+                Tasks for this Course</h1>
         </div>
-        <div class="container" align="center">
-        <a href={% url 'create_course' %} class="btn btn-raised btn-info" style="align-self:center">Create Task</a>
+        <br>
+        <div class="container" align="center" style="padding-left: 350px">
+            <a href={% url 'home' %} class="btn btn-raised btn-info"
+            style="align-self:center-right">Create Task</a>
         </div>
         <br>
         <div class="container">
+        <div class="floatRight">
             <table class="table table-hover table-light">
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col">No.</th>
-                    <th scope="col"></th>
-                    <th scope="col">Course Name</th>
-                    <th scope="col">Course Credit</th>
+                    <th scope="col">Task ID</th>
+                    <th scope="col">Task Description</th>
+                    <th scope="col">Deadline</th>
+                    <th scope="col">Task References</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for course in Courses %}
-                <tr class="clickable-row" data-href="main/{{ course.course_id }}">
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td><a>{{ course.course_id }}</a></td>
-                    <td>{{ course.course_name }}</td>
-                    <td>{{ course.credit }}</td>
-                </tr>
+                {% for task in tasks %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ task.task_id }}</td>
+                        <td>{{ task.task_description }}</td>
+                        <td>{{ task.deadline }}</td>
+                        <td>{{ task.referrence }}</td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>
+        </div>
+                <div class="floatLeft">
+            <table class="table table-hover table-light">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Team Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for task in teams %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ team.team_name }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
         </div>
     {% elif user.is_authenticated and user.is_student %}
         <div class="jumbotron" style="height: 10px">
@@ -42,7 +66,8 @@
         </div>
         <br>
         <div class="container" align="center">
-        <a href={% url 'create_course' %} class="btn btn-raised btn-info" style="align-self:center">Enroll in a course</a>
+            <a href={% url 'create_course' %} class="btn btn-raised btn-info"
+            style="align-self:center">Enroll in a course</a>
         </div>
         <br>
         <div class="container">
@@ -57,12 +82,12 @@
                 </thead>
                 <tbody>
                 {% for course in Courses %}
-                <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{ course.course_id }}</td>
-                    <td>{{ course.course_name }}</td>
-                    <td>{{ course.credit }}</td>
-                </tr>
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ course.course_id }}</td>
+                        <td>{{ course.course_name }}</td>
+                        <td>{{ course.credit }}</td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>
