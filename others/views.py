@@ -68,3 +68,15 @@ def create_course(request):
     else:
         return HttpResponseForbidden()
 
+def course_enroll(request):
+    if request.user.is_authenticated:
+        if request.user.is_student:
+            if request.method == 'POST':
+                print("Nothing")
+            else:
+                return render(request, 'products/course_enroll.html', {'nbar': y})
+        else:
+            return HttpResponseForbidden()
+    else:
+        return HttpResponseForbidden()
+
