@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from others.models import *
 
 
+
 def home(request):
     if request.user.is_authenticated:
         if request.user.is_student:
@@ -52,15 +53,19 @@ def create_course(request):
     if request.user.is_authenticated:
         if request.user.is_teacher:
             if request.method == 'POST':
-                print(request.POST.get('optionsRadios'))
+                selsected_course = request.POST.get('optionsRadios')
+                teacher_id = request.user.id
+                new_cffered_course = OfferedCourse.objects.create(offered_course_id_id=selsected_course,
+                                                                  teachers_code_id=teacher_id, is_expired=False)
+
                 return redirect('home')
             else:
-                x = OfferedCourse.objects.filter(is_expired=0).values('offered_course_id_id')
-                y = Course.objects.all().values('course_id')
-                y = y.exclude(course_id__in=x)
-                x = Course.objects.all()
-                x = x.filter(course_id__in=y)
-                return render(request, 'products/create_course.html', {'OfCourses': x})
+                not_expired = OfferedCourse.objects.filter(is_expired=0).values('offered_course_id_id')
+                course = Course.objects.all().values('course_id')
+                course = course.exclude(course_id__in=not_expired)
+                courses = Course.objects.all()
+                courses = courses.filter(course_id__in=course)
+                return render(request, 'products/create_course.html', {'OfCourses': courses})
         else:
             return HttpResponseForbidden()
     else:
