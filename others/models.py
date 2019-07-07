@@ -13,7 +13,7 @@ class Course(models.Model):
 
 
 class OfferedCourse(models.Model):
-    offered_course_id = models.OneToOneField(Course, on_delete=models.CASCADE)
+    offered_course_id = models.ForeignKey(Course, on_delete=models.CASCADE, unique=False)
     teachers_code = models.ForeignKey(Teacher, on_delete=models.CASCADE, blank=True, null=True)
     is_expired = models.BooleanField(default=False)
 
