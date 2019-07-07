@@ -85,7 +85,7 @@ def course_enroll(request):
 
                 member = request.POST.get('TeamMember3')
                 member3 = User.objects.filter(username=member).values('id').first()
-                member13 = member3.get('id')
+                member3 = member3.get('id')
 
                 course = request.POST.get('courseSelect')
                 course_id = OfferedCourse.objects.filter(offered_course_id_id=course).values('id').first()
@@ -117,8 +117,18 @@ def course_detail(request, course_id):
             team = Team.objects.all()
             team = team.filter(course_id_id__in=course)
             task = Task.objects.filter(course_id_id__in=course).order_by('-deadline')
-            return render(request, 'products/course.html', {'teams': team, 'tasks': task})
+            task_count = task.count()
+            files = []
+            for x in team:
+                team_id = x.id
+                task_id = task.values('task_id')
+                team_task = TaskTeam.objects.filter(team_id_id=team_id, task_id_id__in=task_id)
+                files.append(team_task.count())
+
+            return render(request, 'products/course.html', {'teams': team, 'tasks': task, 'total_task_count': task_count,
+                                                            'team_task_count': files})
         else:
+
             return HttpResponse('<h1>course_id</h1>')
     else:
         print("Not Authorized")
