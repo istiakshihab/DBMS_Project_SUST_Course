@@ -75,15 +75,20 @@ def course_enroll(request):
     if request.user.is_authenticated:
         if request.user.is_student:
             if request.method == 'POST':
-
-                print("Nothing")
+                print(request.POST.get('TeamName'))
+                print(request.POST.get('TeamMember1'))
+                print(request.POST.get('TeamMember2'))
+                print(request.POST.get('TeamMember3'))
+                print(request.POST.get('courseSelect'))
+                return redirect('home')
             else:
                 not_expired = OfferedCourse.objects.filter(is_expired=0).values('offered_course_id_id')
                 course = Course.objects.all().values('course_id')
                 course = course.filter(course_id__in=not_expired)
                 courses = Course.objects.all()
                 courses = courses.filter(course_id__in=course)
-                return render(request, 'products/course_enroll.html', {'nbar': courses})
+                print(courses)
+                return render(request, 'products/course_enroll.html', {'courses': courses})
         else:
             return HttpResponseForbidden()
     else:

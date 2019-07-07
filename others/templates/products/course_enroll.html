@@ -21,19 +21,19 @@
                         <input type="text" class="form-control" name="TeamMember1"
                                aria-describedby="userHelp">
                     </div>                    <div class="form-group">
-                        <label for="TeamMember1" class="bmd-label-floating">Member One Registration Number</label>
-                        <input type="text" class="form-control" name="TeamMember1"
+                        <label for="TeamMember2" class="bmd-label-floating">Member Two Registration Number</label>
+                        <input type="text" class="form-control" name="TeamMember2"
                                aria-describedby="userHelp">
                     </div>                    <div class="form-group">
-                        <label for="TeamMember1" class="bmd-label-floating">Member One Registration Number</label>
-                        <input type="text" class="form-control" name="TeamMember1"
+                        <label for="TeamMember3" class="bmd-label-floating">Member Three Registration Number</label>
+                        <input type="text" class="form-control" name="TeamMember3"
                                aria-describedby="userHelp">
                     </div>
                     <div class="form-group">
                         <label for="courseSelect">Select Available Courses</label>
-                        <select class="form-control" id="courseSelect">
-                            {% for avail in Courses %}
-                                <option>{{ avail.course_id }}</option>
+                        <select class="form-control" id="courseSelect" name="courseSelect">
+                            {% for avail in courses %}
+                                <option value="{{ avail.course_id }}">{{ avail.course_id }}</option>
                             {% endfor %}
                         </select>
                     </div>
