@@ -5,7 +5,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from others.models import *
 
 
-
 def home(request):
     if request.user.is_authenticated:
         if request.user.is_student:
@@ -78,7 +77,7 @@ def course_enroll(request):
             if request.method == 'POST':
                 print("Nothing")
             else:
-                return render(request, 'products/course_enroll.html', {'nbar': y})
+                return render(request, 'products/course_enroll.html',)# {'nbar': y})
         else:
             return HttpResponseForbidden()
     else:
