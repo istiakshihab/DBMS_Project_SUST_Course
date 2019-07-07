@@ -7,6 +7,39 @@
         <div class="card container">
             <h5 align="center">Enroll for a course</h5>
 
+            <form method="post">
+                {% csrf_token %}
+                <div class="container" align="center">
+                    <table class="table table-hover table-dark">
+                        <thead>
+                        <tr class="table-info" align="center">
+                            <th scope="colgroup">Course Code</th>
+                            <th scope="colgroup">Courses</th>
+                            <th scope="colgroup">Course Credits</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for course in OfCourses %}
+                            <tr>
+                                <td align="center">{{ course.course_id }}</td>
+                                <td align="center">{{ course.course_name }}</td>
+                                <td align="center">{{ course.credit }}</td>
+                                <td align="center"><input type="radio" name="optionsRadios"
+                                                          value="{{ course.course_id }}" checked>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        <tr align="center">
+                            <th scope="colgroup" colspan="4">
+                                <button type="submit" class="btn btn-raised btn-primary">Submit
+                                </button>
+                            </th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
         </div>
     {% endif %}
     </body>
