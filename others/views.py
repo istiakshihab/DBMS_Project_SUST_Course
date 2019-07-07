@@ -1,16 +1,19 @@
-from django.http import HttpResponseForbidden
-from django.shortcuts import render, redirect
-
 from django.contrib import auth
-from others.models import *
+from django.http import HttpResponseForbidden, HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
 
+from others.models import *
+from accounts.models import *
 
 def home(request):
     if request.user.is_authenticated:
         if request.user.is_student:
-            registration = request.user.username
-
-            return render(request, 'products/home.html',) #{'Courses': Courses})
+            student_id = request.user.id
+            courses = Team.objects.filter(student_id_id=student_id).values('course_id_id')
+            offered_course = OfferedCourse.objects.filter(is_expired=0).values('offered_course_id_id')
+            offered_course = offered_course.filter(id__in=courses)
+            courses = Course.objects.filter(course_id__in=offered_course)
+            return render(request, 'products/home.html', {'Courses': courses})
         else:
             teacher_id = request.user.id
             offered_course = OfferedCourse.objects.filter(teachers_code=teacher_id).values(
@@ -49,24 +52,20 @@ def create_course(request):
     if request.user.is_authenticated:
         if request.user.is_teacher:
             if request.method == 'POST':
-                print("Nothing")
+                print(request.POST.get('optionsRadios'))
+                return redirect('home')
             else:
-                x = OfferedCourse.objects.filter(is_expired=0)
-                x = x.values('offered_course_id_id')
-                y = Course.objects.all()
-                y = y.values('course_id')
+                x = OfferedCourse.objects.filter(is_expired=0).values('offered_course_id_id')
+                y = Course.objects.all().values('course_id')
                 y = y.exclude(course_id__in=x)
-                x = OfferedCourse.objects.filter(is_expired=0)
-                x = x.values('offered_course_id_id')
-                x = x.values('offered_course_id_id')
-                y = Course.objects.all()
-                y = y.values('course_id')
-                y = y.exclude(course_id__in=x)
-                return render(request, 'products/create_course.html', {'nbar': y})
+                x = Course.objects.all()
+                x = x.filter(course_id__in=y)
+                return render(request, 'products/create_course.html', {'OfCourses': x})
         else:
             return HttpResponseForbidden()
     else:
         return HttpResponseForbidden()
+
 
 def course_enroll(request):
     if request.user.is_authenticated:
@@ -79,4 +78,16 @@ def course_enroll(request):
             return HttpResponseForbidden()
     else:
         return HttpResponseForbidden()
+
+
+def course_detail(request, course_id):
+    if request.user.is_authenticated:
+        if request.user.is_teacher:
+            course_obj = get_object_or_404(Course, course_id=course_id)
+            return HttpResponse('<h1>course_id</h1>')
+        else:
+            return HttpResponse('<h1>course_id</h1>')
+    else:
+        print("Not Authorized")
+        return HttpResponseForbidden(request, '<h1>Not Authorized</h1>')
 
