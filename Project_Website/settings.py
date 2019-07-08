@@ -77,16 +77,12 @@ WSGI_APPLICATION = 'Project_Website.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'USER': 'root',
-        'PASSWORD': '',
-        'NAME': 'teamssfc',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-        
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(PROJECT_DIR, 'teamssfc.db'),
     }
 }
 
