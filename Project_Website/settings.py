@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-import django_heroku
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -81,10 +81,9 @@ PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.path.join(PROJECT_DIR, 'teamssfc.db'),
+        'NAME': 'teamssfc',
         'USER': 'root',
         'PASSWORD': '',
-        'NAME': 'teamssfc',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'OPTIONS': {
